@@ -17,6 +17,9 @@ RUN mvn package
 # Stage 2: Deployment stage
 FROM tomcat:8.5.76-jdk11-openjdk-slim AS deploy
 
+# Remove default apps
+RUN rm -rf /usr/local/tomcat/webapps/*
+
 # Copy the built WAR file from the build stage to Tomcat's webapps directory
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/requirement.war
 
