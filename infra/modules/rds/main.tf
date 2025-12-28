@@ -1,9 +1,10 @@
 resource "aws_db_subnet_group" "db" {
   name       = "${var.project_name}-rds-subnet-group"
-  subnet_ids = aws_subnet.private[*].id
+  subnet_ids = var.private_subnet_ids
+
 
   tags = {
-    Name = "rds-subnet-group"
+    Name = "rds-subnet-group-${terraform.workspace}"
   }
 }
 
@@ -32,5 +33,5 @@ resource "aws_db_instance" "default" {
   skip_final_snapshot    = true
   publicly_accessible    = false
   db_subnet_group_name   = aws_db_subnet_group.db.name
-  vpc_security_group_ids = [aws_security_group.rds.id]
+  vpc_security_group_ids = var.rds_security_group_ids
 }

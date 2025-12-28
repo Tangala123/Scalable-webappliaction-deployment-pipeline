@@ -45,3 +45,17 @@ variable "mysql_parameter_family" {
   description = "RDS MySQL parameter group family (mysql8.0, mysql8.4, mysql5.7)"
   default     = "mysql8.0"  # choose the family that matches your engine_version
 }
+
+variable "private_subnet_ids" {
+  type = list(string)
+}
+
+variable "vpc_id" {
+  type = string
+}
+
+variable "rds_security_group_ids" {
+  type        = list(string)
+  description = "Security group IDs for RDS"
+}
+

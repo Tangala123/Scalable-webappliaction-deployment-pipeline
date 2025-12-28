@@ -1,6 +1,13 @@
 environment = "dev"
 
-region = "ap-south-1"
+cluster_name = "eks-dev"
+
+
+region = "ap-southeast-2"
+
+node_instance_type = "c7i-flex.large"
+node_desired_size  = 2
+
 
 vpc_cidr = "10.0.0.0/16"
 
@@ -15,7 +22,12 @@ private_subnet_cidrs = [
 ]
 
 tags = {
-  Project     = "healthcare-microservices"
+  Project     = "web-app-dev"
   Environment = "dev"
   Owner       = "devops"
 }
+
+db_name     = "devdb"
+db_username = "admin"
+db_password = "DevPassword123!"
+

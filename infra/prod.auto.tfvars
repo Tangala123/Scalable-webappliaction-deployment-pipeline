@@ -1,6 +1,9 @@
 environment = "prod"
 
-region = "ap-south-1"
+cluster_name       = "eks-prod"
+node_desired_size  = 2
+node_instance_type = "c7i-flex.large"
+region             = "ap-southeast-2"
 
 vpc_cidr = "10.2.0.0/16"
 
@@ -15,7 +18,12 @@ private_subnet_cidrs = [
 ]
 
 tags = {
-  Project     = "healthcare-microservices"
+  Project     = "web-app-prod"
   Environment = "prod"
   Owner       = "devops"
 }
+
+db_name     = "proddb"
+db_username = "admin"
+db_password = "ProdPassword123!"
+

@@ -1,6 +1,11 @@
 environment = "staging"
 
-region = "ap-south-1"
+cluster_name = "eks-staging"
+
+node_desired_size  = 2
+node_instance_type = "c7i-flex.large"
+region             = "ap-southeast-2"
+
 
 vpc_cidr = "10.1.0.0/16"
 
@@ -15,7 +20,12 @@ private_subnet_cidrs = [
 ]
 
 tags = {
-  Project     = "healthcare-microservices"
+  Project     = "web-app-staging"
   Environment = "staging"
   Owner       = "devops"
 }
+
+db_name     = "stagingdb"
+db_username = "admin"
+db_password = "stagingPassword123!"
+

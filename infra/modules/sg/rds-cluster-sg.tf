@@ -2,10 +2,10 @@
 #############################
 # Web Security Group
 #############################
-resource "aws_security_group" "web" {
-  name        = "web-sg-{terraform.workspace}"
+resource "aws_security_group" "eks" {
+  name        = "eks-sg-{terraform.workspace}"
   description = "Allow SSH, HTTP, and HTTPS inbound traffic"
-  vpc_id      = aws_vpc.main.id
+  vpc_id = var.vpc_id 
 
   # SSH (restrict in production)
   ingress {
@@ -58,7 +58,7 @@ resource "aws_security_group" "web" {
 resource "aws_security_group" "rds" {
   name        = "rds-sg-${terraform.workspace}"
   description = "Allow MySQL access from Web SG"
-  vpc_id      = aws_vpc.main.id
+  vpc_id = var.vpc_id 
 
   # Allow MySQL only from the Web SG
   ingress {
@@ -66,7 +66,7 @@ resource "aws_security_group" "rds" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.web.id]
+    security_groups = [aws_security_group.eks.id]
   }
 
   # Egress: allow all outbound (for DNS/NTP, etc.)
