@@ -2,8 +2,10 @@ variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
 }
-
-variable "env" {
+variable "project_name" {
+  default = "healthcare"
+}
+variable "environment" {
   type        = string
   description = "Deployment environment"
 }
@@ -37,4 +39,3 @@ variable "security_group_ids" {
   description = "Security group IDs for EKS"
   type        = list(string)
 }
-

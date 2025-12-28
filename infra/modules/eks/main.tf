@@ -2,7 +2,7 @@
 # EKS Cluster (Control Plane)
 # ---------------------------------------
 resource "aws_eks_cluster" "main" {
-  name     = var.cluster_name
+  name     = "${var.cluster_name}-${terraform.workspace}"
   role_arn = var.cluster_role_arn
 
   vpc_config {
@@ -12,7 +12,7 @@ resource "aws_eks_cluster" "main" {
 
   tags = {
     Name = var.cluster_name
-    Environment = var.env
+    Environment = var.environment
   }
 }
 
@@ -21,7 +21,7 @@ resource "aws_eks_cluster" "main" {
 # ---------------------------------------
 resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.main.name
-  node_group_name = "${var.cluster_name}-node-group"
+  node_group_name = "${var.cluster_name}-node-group-${terraform.workspace}"
   node_role_arn  = var.node_role_arn
   subnet_ids     = var.subnet_ids
   instance_types = [var.node_instance_type]
@@ -34,7 +34,6 @@ resource "aws_eks_node_group" "main" {
 
   tags = {
     Name = "${var.cluster_name}-node-group"
-    Environment = var.env
+    Environment = var.environment
   }
 }
-

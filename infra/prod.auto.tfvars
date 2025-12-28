@@ -1,10 +1,21 @@
-env         = "prod"
-region       = "ap-southeast-2"
-cluster_name = "eks-prod"
+environment = "prod"
 
-node_desired_size  = 4
-node_instance_type = "c7i-flex.large"
+region = "ap-south-1"
 
-vpc_cidr  = "10.10.0.0/16"
-pub_cidrs = ["10.10.1.0/24", "10.10.2.0/24"]
-pri_cidrs = ["10.10.3.0/24", "10.10.4.0/24"]
+vpc_cidr = "10.2.0.0/16"
+
+public_subnet_cidrs = [
+  "10.2.1.0/24",
+  "10.2.2.0/24"
+]
+
+private_subnet_cidrs = [
+  "10.2.11.0/24",
+  "10.2.12.0/24"
+]
+
+tags = {
+  Project     = "healthcare-microservices"
+  Environment = "prod"
+  Owner       = "devops"
+}

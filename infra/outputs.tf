@@ -1,11 +1,11 @@
-output "cluster_name" {
-  value = module.eks.cluster_name
+output "alb_dns_name" {
+  value = module.alb.alb_dns
 }
 
-output "cluster_endpoint" {
-  value = module.eks.cluster_endpoint
+output "patient_service" {
+  value = module.patient_ecs.service_name
 }
 
-output "vpc_id" {
-  value = module.vpc.vpc_id
+output "appointment_service" {
+  value = module.appointment_ecs.service_name
 }
