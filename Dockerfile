@@ -18,7 +18,7 @@ RUN mvn package
 FROM tomcat:8.5.76-jdk11-openjdk-slim AS deploy
 
 # Copy the built WAR file from the build stage to Tomcat's webapps directory
-COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/requirement.war
+COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Optionally, you can set environment variables or perform other configurations here
 # For example:
