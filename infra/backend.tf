@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "source-images-bucket-lambda-dec172025"
+    bucket         = "amzn-s3-bucket-storing-statefile"
     key            = "eks-new/terraform.tfstate"
     region         = "ap-southeast-2"
-    dynamodb_table = "terraform-lock"
+    dynamodb_table = "new-code"
     encrypt        = true
   }
 }
