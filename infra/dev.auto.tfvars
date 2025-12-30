@@ -8,8 +8,8 @@ region = "ap-southeast-2"
 node_instance_type = "c7i-flex.large"
 node_desired_size  = 2
 
-
-vpc_cidr = "10.0.0.0/16"
+project_name = "web-app-dev"
+vpc_cidr     = "10.0.0.0/16"
 
 public_subnet_cidrs = [
   "10.0.1.0/24",

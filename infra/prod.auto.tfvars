@@ -23,7 +23,7 @@ tags = {
   Owner       = "devops"
 }
 
-db_name     = "proddb"
-db_username = "admin"
-db_password = "ProdPassword123!"
-
+db_name      = "proddb"
+db_username  = "admin"
+db_password  = "ProdPassword123!"
+project_name = "web-app-prod"

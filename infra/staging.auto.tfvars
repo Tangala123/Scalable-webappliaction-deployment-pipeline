@@ -25,7 +25,8 @@ tags = {
   Owner       = "devops"
 }
 
-db_name     = "stagingdb"
-db_username = "admin"
-db_password = "stagingPassword123!"
+db_name      = "stagingdb"
+db_username  = "admin"
+db_password  = "stagingPassword123!"
+project_name = "web-app-staging"
 
