@@ -37,11 +37,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      # 3. Setup Terraform
+      # 3. Setup Terraform (IMPORTANT FIX)
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.6.0
+          terraform_wrapper: false   # 🔴 REQUIRED to avoid debug pollution
 
       # 4. Terraform Init
       - name: Terraform Init
@@ -55,7 +56,6 @@ jobs:
           ENVIRONMENT="${{ github.event.inputs.environment || 'dev' }}"
           echo "Using environment: $ENVIRONMENT"
 
-          terraform workspace list
           terraform workspace select "$ENVIRONMENT" || terraform workspace new "$ENVIRONMENT"
 
           echo "TF_ENV=$ENVIRONMENT" >> $GITHUB_ENV
@@ -72,18 +72,19 @@ jobs:
         run: |
           terraform apply -auto-approve -var-file="${TF_ENV}.auto.tfvars"
 
-      # 8. Get EKS Cluster Name from Terraform
+      # 8. Get EKS Cluster Name (SAFE FIX)
       - name: Get EKS Cluster Name
         working-directory: infra
         run: |
-          echo "CLUSTER_NAME=$(terraform output -raw cluster_name)" >> $GITHUB_ENV
+          CLUSTER_NAME=$(terraform output -raw cluster_name | tr -d '\n\r')
+          echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
 
       # 9. Configure kubectl
       - name: Configure kubectl
         run: |
           aws eks update-kubeconfig \
-            --name $CLUSTER_NAME \
-            --region $AWS_REGION
+            --name "$CLUSTER_NAME" \
+            --region "$AWS_REGION"
 
       # 10. Deploy Kubernetes manifests
       - name: Deploy Application to EKS
