@@ -67,10 +67,16 @@ jobs:
           terraform plan -var-file="${TF_ENV}.auto.tfvars"
 
       # 7. Terraform Apply
-      - name: Terraform Apply
+      # - name: Terraform Apply
+      #   working-directory: infra
+      #   run: |
+      #     terraform apply -auto-approve -var-file="${TF_ENV}.auto.tfvars"
+      # 7. Terraform Apply
+      - name: Terraform Destroy
         working-directory: infra
         run: |
-          terraform apply -auto-approve -var-file="${TF_ENV}.auto.tfvars"
+          terraform destroy -auto-approve -var-file="${TF_ENV}.auto.tfvars"
+    
 
       # 8. Get EKS Cluster Name (SAFE FIX)
       - name: Get EKS Cluster Name
